@@ -3,6 +3,7 @@ package eventsource
 import (
 	"log"
 	"net/http"
+        "fmt"
 )
 
 type subscription struct {
@@ -60,6 +61,8 @@ func (srv *Server) Handler(channelCallback func(http.ResponseWriter, *http.Reque
 		if srv.AllowCORS {
 			h.Set("Access-Control-Allow-Origin", "*")
 		}
+                fmt.Sprintf("subscribing to channel: %v", channel)
+
 		sub := &subscription{
 			channel:     channel,
 			lastEventId: req.Header.Get("Last-Event-ID"),
