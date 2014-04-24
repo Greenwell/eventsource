@@ -3,6 +3,7 @@ package eventsource
 import (
 	"sort"
 	"sync"
+	"strconv"
 )
 
 // Example repository that uses a slice as storage for past events.
