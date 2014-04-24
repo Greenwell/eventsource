@@ -18,8 +18,10 @@ func NewSliceRepository() *SliceRepository {
 }
 
 func (repo SliceRepository) indexOfEvent(channel, id string) int {
+	idInt, _ := strconv.ParseInt(id, 10, 0)
 	return sort.Search(len(repo.events[channel]), func(i int) bool {
-		return repo.events[channel][i].Id() >= id
+		loopIdInt, _ := strconv.ParseInt(repo.events[channel][i].Id(), 10, 0)
+		return loopIdInt >= idInt
 	})
 }
 
