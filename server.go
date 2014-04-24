@@ -53,7 +53,10 @@ func (srv *Server) Close() {
 
 func (srv *Server) Handler(channelCallback func(http.ResponseWriter, *http.Request) (string)) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-                channel := channelCallback(w, req)
+		channel := channelCallback(w, req)		
+		if channel == "" {
+			return
+		}		
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream; charset=utf-8")
 		h.Set("Cache-Control", "no-cache, no-store, must-revalidate")
